@@ -236,40 +236,5 @@ public class CategoryManager {
 		return deletedCategory;
 		
 	}
-
-	public List<Category> getCategoryNameForEachBook(int category_id) throws SQLException {
-		List<Category> categoryName = new ArrayList<>();
-		Connection connection = ds.getConnection();
-		
-		try {
-			PreparedStatement ps = connection.prepareStatement("select category.name from category left outer join books on category.id = books.category_id where books.category_id=? group by category.name;");
-			ps.setInt(1, category_id);
-			ResultSet resultSet = ps.executeQuery();
-			while(resultSet.next()) {
-				
-				int idString = resultSet.getInt("id");
-				String nameString = resultSet.getString("name");
-				
-				categoryName.add( new Category(idString, nameString));
-			}
-			resultSet.close();
-			ps.close();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			if(connection != null) {
-				try {
-					connection.close();
-					
-				} catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		return categoryName;
-		
-	}
-	
 	
 }

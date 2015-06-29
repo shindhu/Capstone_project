@@ -16,7 +16,7 @@
 		<div class="col-md-4">
 		<h3 style="text-align: left;color:blue;">Login</h3>
 		<p style="color:red">${error }</p>
-		<form  action="LoginServlet" method="get">
+		<form  action="/LearningDiary/login" method="post">
 			
 			<input type="hidden" name="action" value="login">
 			<div class="form-group">

@@ -3,7 +3,6 @@ package Servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,11 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
-
-import org.apache.derby.client.am.SqlException;
-
-import com.sun.xml.internal.ws.resources.HttpserverMessages;
-
 import Domain.Books;
 import Domain.Category;
 import Exceptions.DBErrorException;
@@ -38,8 +32,8 @@ public class EditBookServlet extends HttpServlet {
 		
 		String url = "/WEB-INF/index.jsp";
 		Books bookToEdit = null;
-		int id = new Integer(request.getParameter("id"));
 		BooksManager bm = new BooksManager(ds);
+		int id = new Integer(request.getParameter("id"));
 		ArrayList<Category> categoryList = new ArrayList<>();
 		CategoryManager cm = new CategoryManager(ds);
 		

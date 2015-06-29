@@ -12,8 +12,9 @@ import javax.sql.DataSource;
 
 import org.apache.derby.client.am.SqlException;
 
+import com.sun.istack.internal.FinalArrayList;
+
 import Domain.Books;
-import Domain.Category;
 import Exceptions.DBErrorException;
 
 
@@ -26,14 +27,14 @@ public class BooksManager {
 	}
 
 	// get array of books by user_id
-	public ArrayList<Books> getBooks(int theUserID) throws SQLException {
+	public ArrayList<Books> getBooksByUserID(int theUserID) throws SQLException {
 		ArrayList<Books> theBooks = new ArrayList<>();
 		Connection connection = null;
 
 		try {
 
 			connection = ds.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select id, category_id, image, name, book_format, notes from books where user_id=?");
+			PreparedStatement ps = connection.prepareStatement("select id, user_id, category_id, image, name, book_format, notes from books where user_id=?");
 			ps.setInt(1, theUserID);
 			
 			ResultSet resultSet = ps.executeQuery();
@@ -41,6 +42,7 @@ public class BooksManager {
 			while (resultSet.next()) {
 
 				theBooks.add(new Books(resultSet.getInt("id"),
+										resultSet.getInt("user_id"),
 										resultSet.getInt("category_id"),
 										resultSet.getString("image"),
 										resultSet.getString("name"),
@@ -58,7 +60,6 @@ public class BooksManager {
 				try {
 					connection.close();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -154,6 +155,7 @@ public class BooksManager {
 
 		return theBooksOrderByName;
 	}
+	 
 	
 	// find books by keyword
 	public List<Books> getBooksByKeyword( String theName, String theNotes) throws IOException, SQLException {
@@ -418,6 +420,7 @@ public class BooksManager {
 		return deletedBook;
 		
 	}
+	
 	
 	
 }

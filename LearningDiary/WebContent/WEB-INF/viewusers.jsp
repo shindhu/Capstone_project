@@ -18,18 +18,18 @@
 			<th style="width:10%; text-align: left">Users</th>
 			<th style="width:15%">Email</th>
 			<th style="width: 10%">UserBooks</th>
-			
+			<th style="">Count</th>
 		</tr>
 		
 		 <c:forEach items="${user }" var="theUser">
 			<tr>	
 				<td>${theUser.id }</td>
 				<td style="text-align: left">${theUser.username}</td>
-				<td style="text-align: left">
-					<a href="mailto:mp.shindhu@gmail.com.com?Subject=Hello%20again" target="_top">${theUser.email }</a></td>
-				<td><a class="btn btn-info btn-md" href="category?user_id=${theUser.id }">Books</a></td>
-				
+				<td style="text-align: left">${theUser.email }</td>
+				<td><a class="btn btn-info btn-md" href="admin?user_id=${theUser.id }">Books</a></td>
+				<td>${theUser.bookscount }</td>
 			</tr>
+			
 		</c:forEach> 
 	</table>
 	</div>

@@ -19,21 +19,19 @@ import Domain.Category;
 import Managers.BooksManager;
 import Managers.CategoryManager;
 
-
-@WebServlet({ "/AddBookServlet", "/addBook" })
-public class AddBookServlet extends HttpServlet {
+@WebServlet({ "/AddBookByCategoryServlet", "/addBookByCategory" })
+public class AddBookByCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@Resource(name="jdbc/MyDB")
 	DataSource ds;
 	
-    public AddBookServlet() {
+	public AddBookByCategoryServlet() {
         super();
-        
     }
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		ArrayList<Category> categoryList = new ArrayList<>();
 		CategoryManager cm = new CategoryManager(ds);
 		HttpSession session = request.getSession();
@@ -45,8 +43,8 @@ public class AddBookServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/WEB-INF/addbook.jsp").forward(request, response);
 		
+		getServletContext().getRequestDispatcher("/WEB-INF/addbookbycategory.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,14 +62,13 @@ public class AddBookServlet extends HttpServlet {
 		
 		try {
 			addedBook = new BooksManager(ds).addBook(user_id, category_id, image, name, book_format, notes);
-			request.setAttribute("category_id", category_id);
 		} catch(SqlException e) {
 			e.printStackTrace();
 		}
 		
 		if(addedBook != true) {
 			request.setAttribute("error", "database failed to update the book");
-			url = "/WEB-INF/addBook";
+			url = "/WEB-INF/addBookByCategory";
 			request.setAttribute("category_id", category_id);
 			request.setAttribute("image", image);
 			request.setAttribute("name", name);
@@ -84,7 +81,6 @@ public class AddBookServlet extends HttpServlet {
 		}
 		
 		response.sendRedirect(url);
-		
 	}
 
 }

@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.sql.DataSource;
-
 import Domain.Users;
 
 public class UsersManager {
@@ -55,8 +53,46 @@ public class UsersManager {
 		}
 		
 		return usersList;
-		
 	}
+	
+	// Books count for each user by user_id
+		public ArrayList<Users> getUserBooksCount() throws SQLException 
+		{
+			ArrayList<Users> userBooksCount = new ArrayList<Users>();
+			Connection connection = null;
+			try {
+				connection = ds.getConnection();
+				PreparedStatement ps = connection.prepareStatement("select users.id, users.username, users.password, users.email, count(books.user_id) as bookscount from users left outer join books on users.id = books.user_id group by users.id, users.username, users.password, users.email");
+				
+				ResultSet resultSet = ps.executeQuery();
+				
+				while(resultSet.next()) {
+					userBooksCount.add(new Users(resultSet.getInt("id"),
+													resultSet.getString("username"),
+													resultSet.getString("password"),
+													resultSet.getString("email"),
+													resultSet.getInt("bookscount") ));
+				}
+				resultSet.close();
+				ps.close();
+				
+			} catch(SQLException e) {
+				e.printStackTrace();
+			} finally {
+				if(connection != null) {
+					try {
+						connection.close();
+					} catch (Exception e2) {
+						e2.printStackTrace();
+					}
+				}
+			}
+			
+			
+			return userBooksCount;
+			
+		}
+		
 
 	
 	public boolean addUser(Users theUser) throws SQLException {

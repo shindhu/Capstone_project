@@ -11,8 +11,7 @@
 
 	<div class="table-responsive" id="outerbody">
 		<p style="color: red">${error_delete }</p>
-		<a class="btn btn-lg" href="/LearningDiary/addCategory?user_id=${user_id }"
-			style="color: blue; font-weight: bold;">Add Category</a>
+		<a class="btn btn-lg" href="/LearningDiary/addCategory?user_id=${user_id }" style="color: blue; font-weight: bold;">Add Category</a>
 		<table class="table table-hover" style="width: 40%">   
 			<tr>
 				<!-- <th style="width: 10%">ID</th> -->
@@ -20,11 +19,13 @@
 				<th >Count</th>
 				<th >Edit</th>
 				<th >Delete</th>
+				<th>Add Book</th>
 			</tr>
 			<c:forEach items="${categoryList }" var="category">
 				<tr>
 					<%-- <td>${category.id }</td> --%>
 					<td style="text-align: left;"><a href="booksByCategory?id=${category.id}">${category.name }</a></td>
+					
 					<td><a href="booksByCategory?id=${category.id}">${category.bookcounts }</a></td>
 					<td><a class="btn btn-warning btn-md"
 						href="editCategory?id=${category.id }"> Edit </a></td>
@@ -35,8 +36,12 @@
 								id="submit">
 						</form>
 					</td>
+					<td><a class="btn btn-info btn-md" href="/LearningDiary/addBookByCategory?category_id=${category.id }" >Add Book</a></td>
 				</tr>
 			</c:forEach>
+			<tr>
+				<td></td>
+			</tr>
 		</table>
 	</div>
 	

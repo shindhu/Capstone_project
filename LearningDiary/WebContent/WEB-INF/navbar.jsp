@@ -1,5 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+           
 <nav class="navbar  navbar-default navbar-fixed-top" >
 	<div class="container-fluid">
 
@@ -36,14 +38,40 @@
 
 					</ul>
 				</c:if> 
+				
+				<c:if test="${isLoggedIn == true}">
+					<c:choose>
+						<c:when test="${ user_id == 1 }">
+							<ul class="nav navbar-nav navbar-left" style="font-size: medium;">
+								<li><a href="/LearningDiary/users" style="color: black;">Users</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right" style="font-size: medium;">
+								<li> <a>Logged in as ${capName }, id: ${user_id } </a></li>
+								<li><a href="/LearningDiary/logout" style="color: red;">
+								<span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
+							</ul>
+							
+						</c:when>
+						<c:otherwise>
+							<ul class="nav navbar-nav navbar-left" style="font-size: medium;">
+								<li><a href="/LearningDiary/category" style="color: black;">Category</a></li>
+								<li><a href="/LearningDiary/books" style="color: black;">Books</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right" style="font-size: medium;">
+								<li> <a>Logged in as ${capName }, id: ${user_id } </a></li>
+								<li><a href="/LearningDiary/logout" style="color: red;">
+								<span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
+							</ul>
+							</c:otherwise>
+					</c:choose>
+				</c:if>
+				
+				<%-- 
 				<c:if test="${isLoggedIn == true}">
 					<ul class="nav navbar-nav navbar-left" style="font-size: medium;">
-						
 						<li><a href="/LearningDiary/category" style="color: black;">Category</a></li>
 						<li><a href="/LearningDiary/books" style="color: black;">Books</a></li>
-						<c:if test="${user.admin }">
-							<li><a href="/LearningDiary/users" style="color: black;">Users</a></li>
-						</c:if>
+						<li><a href="/LearningDiary/users" style="color: black;">Users</a></li>
 					</ul>
 					
 					<ul class="nav navbar-nav navbar-right" style="font-size: medium;">
@@ -52,6 +80,8 @@
 						<span class="glyphicon glyphicon-log-out"></span> Log Out </a></li>
 					</ul>
 				</c:if>
+				 --%>
+				
 			</font>
 		</div>
 

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>LearningDiary:AddBook</title>
+<title>LearningDiary:AddBookByCategory</title>
 <%@ include file="/WEB-INF/common-css-javascript.html"%>
 
 </head>
@@ -10,36 +10,19 @@
 	<c:import url="/WEB-INF/navbar.jsp"></c:import>
 	
 	<div id="outerbody_table"> 
-	<a href="/LearningDiary/books" style="color: blue; font-style: italic;">Back to Books</a>
-	<h2 style="text-align: left; color:blue">Add Book</h2>
-	
-		<form action="addBook" method = "post">
-			<input type="hidden" name="action" value="add-book">
+		<form action="addBookByCategory" method = "post">
+			<input type="hidden" name="action" value="add-bookbycategory">
 			
 			 <div class="form-group">
 				<label>Category ID</label><br>
-				<%-- <input class="form-control" style="width:500px" type="text" name="category_id" value="${book.category_id }" required placeholder="Category ID"><br> --%>
-				 <select name="category_id"> 
-					<c:forEach items="${categories}" var="category">
-						<option value="${category.id}"> ${category.id}.  ${category.name}</option>
-					</c:forEach>
-				</select> 
-				
+				<input class="form-control" style="width:500px" type="text" name="category_id" value="${category.id }" ><br> 
 			</div>
 			
-			<%-- <div class="from-group">
-				<label>Select Category Name</label><br>
-				<input class="form-control" style="width:500px" type="text" name="category_name" value="${book.category_name }" required placeholder="Category Name"><br>
+			 <%--<div class="from-group">
+				<label>Category Name</label><br>
+				<input class="form-control" style="width:500px" type="text" name="category_name" value="${ }" required placeholder="Category Name"><br>
 				
 				<c:out value="${categories}"></c:out>	
-				
-					 <select name="category_id"> 
-						<c:forEach items="${categories}" var="category">
-							<option value="${category.id}">
-							${category.id}.  ${category.name}</option>
-						</c:forEach>
-					 </select> 
-				
 			</div> --%>
 
 			<div class="from-group">	

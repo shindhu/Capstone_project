@@ -33,8 +33,6 @@ public class Books {
 		
 	}
 	
-	
-
 	public Books(int id, int category_id, String image, String name, String book_format, String notes) {
 		this.id = id;
 		this.category_id = category_id;
@@ -44,7 +42,7 @@ public class Books {
 		this.notes = notes;
 		
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -121,6 +119,7 @@ public class Books {
 				+ category_id + ", image=" + image + ", name=" + name
 				+ ", book_format=" + book_format + ", notes=" + notes + "]";
 	}
+
 	
 	
 }

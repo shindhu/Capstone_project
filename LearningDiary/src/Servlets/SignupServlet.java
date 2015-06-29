@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import Domain.Users;
@@ -73,7 +72,7 @@ public class SignupServlet extends HttpServlet {
 					request.setAttribute("email", email);
 					getServletContext().getRequestDispatcher("/WEB-INF/main.jsp").forward(request, response);
 				} else {
-					request.setAttribute("error_username","sorry already have the same username. Try different name.");
+					request.setAttribute("error_username","sorry already have the same username. Try with different name.");
 					getServletContext().getRequestDispatcher(url).forward(request, response);
 					return;
 				}

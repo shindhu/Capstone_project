@@ -44,6 +44,7 @@ public class CategoryServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (loggedIn(session)) {
 			request.setAttribute("categoryList", categoryTotals(session));
+			//request.setAttribute("categories", category(session));
 			request.getRequestDispatcher("/WEB-INF/viewcategory.jsp").forward(request,response);
 		} else {
 			response.sendRedirect("/LearningDiary/login");			
@@ -56,7 +57,7 @@ public class CategoryServlet extends HttpServlet {
 		int user_id = (Integer) session.getAttribute("user_id");
 		try {
 			CategoryManager cm = new CategoryManager(ds);
-
+			
 			return  cm.getCategoryTotals(user_id);			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,5 +66,21 @@ public class CategoryServlet extends HttpServlet {
 		}
 
 	}
-
+	
+	/*private List<Category> category(HttpSession session)
+			throws ServletException, IOException 
+	{
+		int user_id = (Integer) session.getAttribute("user_id");
+		try {
+			CategoryManager cm = new CategoryManager(ds);
+			return cm.getCategory(user_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+			
+		}
+	}*/
+	
+	
 }

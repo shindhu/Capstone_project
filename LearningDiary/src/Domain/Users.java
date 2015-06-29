@@ -3,9 +3,10 @@ package Domain;
 public class Users {
 	
 	int id;
-	String username;
+	public String username;
 	String password;
 	String email;
+	int bookscount;
 	
 	public Users(int id, String username, String password, String email) {
 		super();
@@ -20,9 +21,18 @@ public class Users {
 		this.username = username;
 		this.password = password;
 		this.email = email;
-		
-		
 	}
+	
+	
+	public Users(int id, String username, String password, String email, int bookscount) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password  = password;
+		this.email = email;
+		this.bookscount = bookscount;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -47,13 +57,22 @@ public class Users {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	public int getBookscount() {
+		return bookscount;
+	}
+
+	public void setBookscount(int bookscount) {
+		this.bookscount = bookscount;
+	}
+
 	@Override
 	public String toString() {
 		return "Users [id=" + id + ", username=" + username + ", password="
-				+ password + ", email=" + email + "]";
+				+ password + ", email=" + email + ", bookscount=" + bookscount
+				+ "]";
 	}
-	
-	
+
 	//implements the comparable interface
 	public int compareTo(Users o) {
 		

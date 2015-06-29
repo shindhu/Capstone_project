@@ -15,8 +15,8 @@
 		
 		<table class="table table-bordered">
 			<tr style="text-align: justify; ">
-				<th>Category</th>
 				<th style="width:5%"> <a href="/LearningDiary/books?" style="color:red">ID<span class="glyphicon glyphicon-sort"></span></a></th>
+				<th>Category</th>
 				<th>Image</th>
 				<th style="width:15%; text-align: left"> <a href="/LearningDiary/books?order=name" style="color:red">Name<span class="glyphicon glyphicon-sort-by-alphabet"></span></a></th>
 				<th>Book_Format</th>
@@ -28,8 +28,8 @@
 
 			<c:forEach items="${booksList }" var="book">
 				<tr>
-					<td> ${book.category_id}</td>
 					<td>${book.id }</td>
+					<td> ${categoryName[book.category_id].name}</td>
 					<td><img src="${book.image }" height=100 width=100 /></td>
 					<td  style="text-align: left;">${book.name }</td>
 					<td>${book.book_format }</td>

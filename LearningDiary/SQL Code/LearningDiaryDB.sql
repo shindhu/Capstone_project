@@ -119,7 +119,8 @@ INSERT INTO BOOKS(USER_ID, CATEGORY_ID, IMAGE, NAME, BOOK_FORMAT, NOTES) VALUES(
 INSERT INTO BOOKS(USER_ID, CATEGORY_ID, IMAGE, NAME, BOOK_FORMAT, NOTES) VALUES(3, 6,'http://ecx.images-amazon.com/images/I/51QuJvdTXfL._SY344_BO1,204,203,200_.jpg','Pinkalicious: Cherry Blossom','Kindle','Pinkalicious experiences a traditional Japanese cherry blossom celebration and learns to fly a kite with the help of a new friend.');
 SELECT * FROM BOOKS;
 
-select * from books where id =1;
+-- get books by user_id
+select * from books where user_id =2;
 
 -- prints the category name by category_id in books table
 select category.id, category.name from category
@@ -127,18 +128,26 @@ left outer join books on category.id = books.category_id
 where books.category_id = 6
 group by category.id, category.name;
 
--- prints the category name by category_id in books table
-select category.name, category.id from category
-left outer join books on category.id = books.category_id
-where books.category_id = 5
-group by category.id, category.name;
-
 set schema app;
 
-select id, category_id, image, name, book_format, notes from books where user_id=11 order by name asc ;
+-- prints number of books in each category for each user
+select category.id, category.name, count(books.id) as bookcounts 
+from category left outer join books on category.id = books.category_id
+where category.user_id = 3
+group by category.id, category.name;
 
-SELECT * FROM BOOKS
-WHERE USER_ID = 2 and id=15;
+-- to display the category name and count of books in each category and shows count as 0 if there is no book in oone of the category
+select category.id, category.name, count(books.category_id) as bookcounts
+from category left outer join books on category.id = books.category_id 
+group by category.id,category.name;
+
+-- print book count for each user
+select users.id, users.username, users.password, users.email, count(books.user_id) as bookscount 
+from users left outer join books on users.id = books.user_id 
+group by users.id, users.username, users.password, users.email;
+
+
+select id, category_id, image, name, book_format, notes from books where user_id=11 order by name asc ;
 
 -- prints categories id, name and bookcounts in each categroy
 select category.id, category.name, count(books.category_id) as bookcounts
@@ -159,7 +168,6 @@ select category.id, category.name, count(books.id) as bookcounts from category
 left outer join books on category.id = books.category_id
 where category.user_id = 3
 group by category.id, category.name;
-
 
 -- get books by book id
 select * from books where id=4;
