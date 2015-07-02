@@ -27,14 +27,15 @@ public class CategoryManager {
 		try {
 
 			connection = ds.getConnection();
-			PreparedStatement ps = connection.prepareStatement("select id, name from category where user_id=?");
+			PreparedStatement ps = connection.prepareStatement("select * from category where user_id=?");
 			ps.setInt(1, theUserID);
 			ResultSet resultSet = ps.executeQuery();
 
 			while (resultSet.next()) {
 
-				theCategory.add( new Category(resultSet.getInt("id"), resultSet
-						.getString("name")) );
+				theCategory.add( new Category(resultSet.getInt("id"),
+												resultSet.getInt("user_id"),
+												resultSet.getString("name")) );
 			}
 
 			resultSet.close();

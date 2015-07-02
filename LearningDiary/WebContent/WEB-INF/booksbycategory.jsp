@@ -16,8 +16,9 @@
 	<c:import url="/WEB-INF/navbar.jsp"></c:import>
 	<div class="table-responsive" id="outerbody_table" >
 	<a href="/LearningDiary/category" style="color: blue; font-style: italic;">Back to Category</a>
-	<a class="btn btn-lg" href="/LearningDiary/addBook" style="color:blue; font-weight: bold;">Add Book</a>
+	<a class="btn btn-lg" href="/LearningDiary/addBookByCategory?category_id=${categories.id }" style="color:blue; font-weight: bold;">Add Book</a>
 	<h3 id="category_name"> ${categories.name }</h3>
+	${error_delete }
 	<table class="table table-bordered">
 		<tr>
 			<th style="width:5%">ID</th>
@@ -25,8 +26,8 @@
 			<th style="width: 10%">Name</th>
 			<th style="width:5%">Book_Format</th>
 			<th >Notes</th>
-			<!-- <th>Edit</th>
-			<th>Delete</th> -->
+			<th>Edit</th>
+			<th>Delete</th>
 			
 		</tr>
 		
@@ -38,14 +39,15 @@
 				<td>${book.name }</td>
 				<td>${book.book_format }</td>
 				<td style="text-align: justify;">${book.notes }</td>
-				<%-- <td style="width:100px">
+				<td style="width:100px">
 					<a class="btn btn-warning btn-md" href="editBook?id=${book.id }"> Edit </a></td>
 				<td>
 					<form action="deleteBook" method="post">
 						<input type="hidden" name="id" value="${book.id }">
+						<input type="hidden" name="category_id" value="${book.category_id }">
 						<input class="btn btn-danger btn-sm" type="submit" value="Delete" id="submit">
 					</form>
-				</td> --%>
+				</td>
 			</tr>
 		</c:forEach> 
 			

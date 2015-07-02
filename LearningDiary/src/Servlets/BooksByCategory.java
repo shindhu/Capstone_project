@@ -39,7 +39,7 @@ public class BooksByCategory extends HttpServlet {
 		//HttpSession mySession = request.getSession();
 		
 		String url = "/WEB-INF/viewcategory.jsp";
-		int id = new Integer(request.getParameter("id"));
+		int category_id = new Integer(request.getParameter("category_id"));
 		HttpSession session = request.getSession();
 		int user_id = (Integer) session.getAttribute("user_id");
 		
@@ -49,8 +49,8 @@ public class BooksByCategory extends HttpServlet {
 		ArrayList<Books> booksByCategory = null;
 		Category listOfCategories = null;
 		try {
-			booksByCategory = bm.getBooksByCategoryID(user_id, id);
-			listOfCategories = cm.getCategoryByID(id, user_id);
+			booksByCategory = bm.getBooksByCategoryID(user_id, category_id);
+			listOfCategories = cm.getCategoryByID(category_id, user_id);
 			
 		} catch ( DBErrorException | SQLException |SqlException e) {
 			e.printStackTrace();

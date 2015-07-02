@@ -15,6 +15,7 @@ import javax.sql.DataSource;
 
 import org.apache.derby.client.am.SqlException;
 
+import Domain.Books;
 import Domain.Category;
 import Managers.BooksManager;
 import Managers.CategoryManager;
@@ -33,13 +34,21 @@ public class AddBookByCategoryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		ArrayList<Category> categoryList = new ArrayList<>();
+		Books book = new Books();
+		
 		CategoryManager cm = new CategoryManager(ds);
 		HttpSession session = request.getSession();
 		int user_id = (Integer) session.getAttribute("user_id");
+		int category_id = new Integer (request.getParameter("category_id"));
+		book.setCategory_id(category_id);
+		
 		try {
 			
 			categoryList = cm.getCategory(user_id);
+			System.out.println("Category List is: "+categoryList);
 			request.setAttribute("categories", categoryList);
+			request.setAttribute("book", book);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -79,7 +88,7 @@ public class AddBookByCategoryServlet extends HttpServlet {
 			return;
 			
 		}
-		
+		url="/LearningDiary/booksByCategory?category_id="+category_id;
 		response.sendRedirect(url);
 	}
 

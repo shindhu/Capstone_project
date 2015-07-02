@@ -10,7 +10,7 @@
 	<c:import url="/WEB-INF/navbar.jsp"></c:import>
 	
 	<div id="outerbody_table"> 
-	<a href="/LearningDiary/books" style="color: blue; font-style: italic;">Back to Books</a>
+	<!-- <a href="/LearningDiary/books" style="color: blue; font-style: italic;">Back to Books</a> -->
 	<h2 style="text-align: left; color:blue">Add Book</h2>
 	
 		<form action="addBook" method = "post">

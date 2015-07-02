@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import Domain.Books;
 import Domain.Users;
-import Managers.BooksManager;
 import Managers.UsersManager;
 
 
@@ -35,19 +33,26 @@ public class UsersServlet extends HttpServlet {
 
 		String url = "/WEB-INF/viewusers.jsp";
 		UsersManager um = new UsersManager(ds);
-		
 		ArrayList<Users> theUsers = null;
-		
-		//Users users = null;
+	
 		HttpSession session = request.getSession();
 		Boolean loggedInBoolean = (Boolean) session.getAttribute("isLoggedIn");
 		
 		if(loggedInBoolean != null) {
 			Boolean loggedIn = loggedInBoolean.booleanValue();
 			if(loggedIn) {
+				String username = (String) session.getAttribute("username");
 					try {
-						theUsers = um.getUserBooksCount();
-						System.out.println(theUsers);
+						if(username.matches("admin")) {
+							theUsers = um.getUserBooksCount();
+							System.out.println(theUsers);
+							
+						} else {
+							url = "/WEB-INF/index.jsp";
+							//request.setAttribute("Users_access_error", "You dont have access");
+							System.out.println("You don't have access");
+						}
+						
 					} catch(SQLException e) {
 						url = "/WEB-INF/dberror.jsp";
 						getServletContext().getRequestDispatcher(url).forward(request, response);

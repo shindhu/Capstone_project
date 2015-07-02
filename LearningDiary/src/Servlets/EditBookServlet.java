@@ -3,6 +3,7 @@ package Servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
 import Domain.Books;
 import Domain.Category;
 import Exceptions.DBErrorException;
@@ -62,14 +64,14 @@ public class EditBookServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	   String url= request.getContextPath() + "/viewBooks";
+	 //  String url= request.getContextPath() + "/booksByCategory";
 	   boolean updateSuccedded = false;
 	   HttpSession session = request.getSession();
-	   	
-	   int user_id = (Integer) session.getAttribute("user_id");
+	   
+	  
+	   	int user_id = (Integer) session.getAttribute("user_id");
 		int id= new Integer(request.getParameter("id"));
 		int category_id = new Integer(request.getParameter("category_id"));
-		//String category_id = request.getParameter("category_id");
 		String image = request.getParameter("image");
 		String name = request.getParameter("name");
 		String book_format = request.getParameter("book_format");
@@ -80,15 +82,17 @@ public class EditBookServlet extends HttpServlet {
 		
 		try {
 				updateSuccedded = bm.updateBook(updatedBook);
+				System.out.println(updateSuccedded);
 				
 		} catch (DBErrorException | SQLException e) {
 			e.printStackTrace();
-			//getServletContext().getRequestDispatcher(url).forward(request, response);
+			getServletContext().getRequestDispatcher("/LearningDiary/dberror.jsp").forward(request, response);
+			return;
 		}
 		
 		if(updateSuccedded != true) {
 			request.setAttribute("error_update", "Book didn't update in the database! Try again");
-			url = "/WEB-INF/editBook?id" + id;
+			String url = "/WEB-INF/editBook?id" + id;
 			request.setAttribute("id", id);
 			request.setAttribute("category_id", category_id);
 			request.setAttribute("image", image);
@@ -100,9 +104,9 @@ public class EditBookServlet extends HttpServlet {
 			return;
 			
 		} 
+		String url="/LearningDiary/booksByCategory?category_id="+category_id;
+		response.sendRedirect(url);
 		
-		
-		response.sendRedirect("/LearningDiary/books");
 	}
 
 }

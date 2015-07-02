@@ -24,9 +24,8 @@
 			<c:forEach items="${categoryList }" var="category">
 				<tr>
 					<%-- <td>${category.id }</td> --%>
-					<td style="text-align: left;"><a href="booksByCategory?id=${category.id}">${category.name }</a></td>
-					
-					<td><a href="booksByCategory?id=${category.id}">${category.bookcounts }</a></td>
+					<td style="text-align: left;"><a href="booksByCategory?category_id=${category.id}">${category.name }</a></td>
+					<td>${category.bookcounts }</td>
 					<td><a class="btn btn-warning btn-md"
 						href="editCategory?id=${category.id }"> Edit </a></td>
 					<td>

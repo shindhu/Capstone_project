@@ -21,8 +21,8 @@
 				<th style="width:15%; text-align: left"> <a href="/LearningDiary/books?order=name" style="color:red">Name<span class="glyphicon glyphicon-sort-by-alphabet"></span></a></th>
 				<th>Book_Format</th>
 				<th style="width:70%">Notes</th>
-				<th>Edit</th>
-				<th>Delete</th>
+				<!-- <th>Edit</th>
+				<th>Delete</th> -->
 				
 			</tr>
 
@@ -34,14 +34,14 @@
 					<td  style="text-align: left;">${book.name }</td>
 					<td>${book.book_format }</td>
 					<td style="text-align: justify;">${book.notes }</td>
-					<td style="width:100px">
+					<%-- <td style="width:100px">
 						<a class="btn btn-warning btn-md" href="editBook?id=${book.id }"> Edit </a></td>
 					<td>
 						<form action="deleteBook" method="post">
 							<input type="hidden" name="id" value="${book.id }">
 							<input class="btn btn-danger btn-sm" type="submit" value="Delete" id="submit">
 						</form>
-					</td>
+					</td> --%>
 				</tr>
 			</c:forEach>
 		</table>

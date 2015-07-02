@@ -46,11 +46,9 @@ public class SignupServlet extends HttpServlet {
 		String email = request.getParameter("email");
 
 		if (!password.equals(verify_password)) {
-			request.setAttribute("error",
-					"Passwords did not match. Please Try again!");
+			request.setAttribute("error", "Passwords did not match. Please Try again!");
 			url = "/WEB-INF/signup.jsp";
-			getServletContext().getRequestDispatcher(url).forward(request,
-					response);
+			getServletContext().getRequestDispatcher(url).forward(request,response);
 			return;
 
 		} else {

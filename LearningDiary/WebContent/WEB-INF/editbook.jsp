@@ -11,9 +11,9 @@
 	<c:import url="/WEB-INF/navbar.jsp"></c:import>
 	
 	<div id="outerbody_table"> 
-	<a href="/LearningDiary/books" style="color: blue; font-style: italic;">Back to Books</a>
 	<h2 style="text-align: left; color:blue">Edit Book</h2>
 	
+		${error_update }
 		<form action="editBook" method = "post">
 			<input type="hidden" name="action" value="edit-book">
 			
@@ -25,12 +25,12 @@
 			
 			<div class="form-group">
 				<label>Category ID</label>
-				<%-- <input class="form-control" style="width:500px;font-size: small;" type="text" name="category_id" value="${book.category_id }" readonly><br> --%>
-				<select name="category_id">
+				<input class="form-control" style="width:500px;font-size: small;" type="text" name="category_id" value="${book.category_id }" readonly><br>
+				<%-- <select name="category_id">
 					<c:forEach items="${categories }" var="category">
 						<option value="${category.id }"> ${category.id }. ${category.name }</option> 
 					</c:forEach>
-				</select>
+				</select> --%>
 			</div>
 			
 			<div class="from-group">	

@@ -15,7 +15,7 @@
 			
 			 <div class="form-group">
 				<label>Category ID</label><br>
-				<input class="form-control" style="width:500px" type="text" name="category_id" value="${category.id }" ><br> 
+				<input class="form-control" style="width:500px" type="text" name="category_id" value="${book.category_id}" required><br> 
 			</div>
 			
 			 <%--<div class="from-group">
@@ -37,7 +37,7 @@
 			
 			<div class="from-group">	
 				<label>Book Format</label>
-				<input class="form-control" style="width:500px; font-size: 20;" type="text" name="book_format" value="${book.book_format }" placeholder="Book Format"><br>
+				<input class="form-control" style="width:500px; font-size: 20;" type="text" name="book_format" value="${book.book_format }" placeholder="Book Format" required><br>
 			</div>
 			
 			<div class="from-group">	

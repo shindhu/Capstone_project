@@ -19,7 +19,7 @@
 				<p>
 					Thank you for visiting my Webpage. 
 					My name is Shindhu (prounounced 'Sindhu' ... h silent). 
-					I graduated with Bachelors degree in Information Technology from Madras University back in 2007 and
+					I graduated with Bachelors degree in Information Technology from Anna University back in 2007 and
 					recently pursued Certification in Java Development Series from Austin Community College (ACC).
 				</p>
 				<p>
@@ -29,7 +29,7 @@
 			<div class="col-sm-6">
 				<h3 style="color: blue;">Contact us</h3>
 				
-				<p> Got a question ? Got a suggestion ? <br>
+				<p> Got a question ? Got a suggestion ? Call 512-431-5668 or<br>
 				Please submit your contact information and I will be in touch shortly.
 				</p>
 				

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  * Servlet Filter implementation class AuditFilter
  */
 //@WebFilter("/*")
-@WebFilter({"/*"})
+@WebFilter({"/login", "/books"})
 public class AuditFilter implements Filter {
 
   

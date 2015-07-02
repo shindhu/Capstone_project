@@ -29,30 +29,37 @@ public class DeleteBookServlet extends HttpServlet {
    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-    	String url = request.getContextPath() + "/books";
-    	
+    //	String url = request.getContextPath() + "/books";
     	boolean updateSucceeded = false;
-    	
+    	String url = "/WEB-INF/index.jsp";
     	int id = new Integer(request.getParameter("id"));
+    	
     	HttpSession session = request.getSession();
     	int user_id = (Integer) session.getAttribute("user_id");
+    	int category_id = new Integer(request.getParameter("category_id"));
+    	//System.out.println("Category_id="+category_id);
     	try {
     		updateSucceeded = new BooksManager(ds).deleteBookWithID(id, user_id);
-    		url="/LearningDiary/books";
+    		System.out.println("Deleted book: "+updateSucceeded);
+    		
+    		url="/LearningDiary/booksByCategory?category_id="+category_id;
+    		response.sendRedirect(url);
+    		return;
     		
     	} catch(SQLException e) {
     		e.printStackTrace();
+    		getServletContext().getRequestDispatcher("/LearningDiary/dberror.jsp").forward(request, response);
+    		
     	}
     	
     	if(updateSucceeded != true) {
-    		request.setAttribute("error", "Delete of databse record failed");
+    		request.setAttribute("error_delete", "Delete of databse record failed");
     		url = "WEB-INF/booksByCategory";
-    		
     		getServletContext().getRequestDispatcher(url).forward(request, response);
     		
     	}
     	
-    	response.sendRedirect(url);
+    	getServletContext().getRequestDispatcher(url).forward(request, response);
     	
 	}
 

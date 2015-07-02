@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import Domain.Books;
@@ -33,27 +34,41 @@ public class AdminServlet extends HttpServlet {
 		ArrayList<Books> userListsOfBooks = null;
 		BooksManager bm = new BooksManager(ds);
 		int user_id = new Integer(request.getParameter("user_id"));
-		try {
-			userListsOfBooks = bm.getBooksByUserID(user_id);
-			System.out.println(userListsOfBooks);
-			request.setAttribute("userBooks", userListsOfBooks);
-			/*request.getRequestDispatcher("/WEB-INF/userbooks.jsp").forward(request, response);
-			return;*/
-		} catch (SQLException e) {
-			e.printStackTrace();
-			url = "/WEB-INF/dberror.jsp";
-			request.getRequestDispatcher(url).forward(request, response);
-			return;
+		
+		HttpSession session = request.getSession();
+		Boolean loggedInBoolean = (Boolean) session.getAttribute("isLoggedIn");
+		
+		if(loggedInBoolean != null) {
+			Boolean loggedIn = loggedInBoolean.booleanValue();
+			if(loggedIn) {
+				String username = (String) session.getAttribute("username");
+					try {
+						if(username.matches("admin")) {
+							userListsOfBooks = bm.getBooksByUserID(user_id);
+							System.out.println(userListsOfBooks);
+							//request.setAttribute("userBooks", userListsOfBooks);
+						} else {
+							url="/WEB-INF/index.jsp";
+						}
+						
+					} catch (SQLException e) {
+						e.printStackTrace();
+						url = "/WEB-INF/dberror.jsp";
+						request.getRequestDispatcher(url).forward(request, response);
+						return;
+					}
+			}
 		}
 		
+		if(userListsOfBooks != null) {
+			url="/WEB-INF/userbooks.jsp";
+			request.setAttribute("userBooks", userListsOfBooks);
+		}
+		
+		
 		getServletContext().getRequestDispatcher(url).forward(request, response);
-		
-		
+			
 	}
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
-
+		
 }
